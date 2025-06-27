@@ -19,11 +19,11 @@
 ---
 ## 🗞️ News
 
-* **\[2025.02]** 🔥 [Online Demo](https://OmniAudio-360v2sa.github.io/) is live — try it now!
-* **\[2025.04]** 🔥 [OmniAudio paper](https://arxiv.org/pdf/2504.14906) is released on arXiv.
-* **\[2025.05]** 🎉 OmniAudio has been accepted by **ICML 2025**, See you Vancouver!
-* **\[2025.05]** 🔥 Released inference code and OmniAudio dataset.
-* **\[2025.05]** 📦 Released pretrained model weights and dataset on Hugging Face.
+* **[2025.05]** 📦 Released pretrained model weights and dataset on Hugging Face.
+* **[2025.05]** 🔥 Released inference code and OmniAudio dataset.
+* **[2025.05]** 🎉 OmniAudio has been accepted by **ICML 2025**, See you Vancouver!
+* **[2025.04]** 🔥 [OmniAudio paper](https://arxiv.org/pdf/2504.14906) is released on arXiv.
+* **[2025.02]** 🔥 [Online Demo](https://OmniAudio-360v2sa.github.io/) is live — try it now!
 
 
 ---
@@ -149,6 +149,7 @@ The dataset is constructed via a two-stage crawling and filtering pipeline as fo
 * All videos are collected from YouTube under terms consistent with fair use for academic research.
 * Videos under Creative Commons licenses are properly attributed.
 * No video is used for commercial purposes.
+* No model weights is used for commercial purposes.
 * All channel metadata is recorded in `dataset/channels.csv`.
 
 
