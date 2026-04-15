@@ -32,6 +32,7 @@ def _check_size(check_files: List[str], size=1024, remove: bool = True):
                 break
     return check_success
 
+
 def download_video_process(args: Dict):
     return download_video(**args)
 
@@ -43,11 +44,14 @@ def download_video_segments_process(args: Dict):
 def download_4ch_segments_process(args: Dict):
     return download_4ch_segments(**args)
 
+
 def download_360_segments_process(args: Dict):
     return download_360_segments(**args)
 
+
 def download_360_process(args: Dict):
     return download_360(**args)
+
 
 def download_video(
     video_id: str,
@@ -159,9 +163,7 @@ def download_4ch_segments(
     format_code = "ba*[audio_channels=4]"
     ext = "webm"
 
-    origin_file_items = [
-        video_id + "_" + str(start_time) for start_time in start_times
-    ]
+    origin_file_items = [video_id + "_" + str(start_time) for start_time in start_times]
     file_path_base = os.path.join(output_folder, video_id)
     if skip_exists:
         original_start_times = start_times
@@ -177,9 +179,7 @@ def download_4ch_segments(
 
     end_times = [t + time_interval for t in start_times]
 
-    file_items = [
-        video_id + "_" + str(start_time) for start_time in start_times
-    ]
+    file_items = [video_id + "_" + str(start_time) for start_time in start_times]
 
     # specify command
     cmd = [
@@ -197,7 +197,7 @@ def download_4ch_segments(
         "4",
         "--force-keyframes-at-cuts",
         "--extractor-args",
-        "youtube:player_client=all",
+        "youtube:player_client=android_vr",  # "youtube:player_client=all",
         "--merge-output-format",
         "webm",
     ]
@@ -246,6 +246,7 @@ def download_4ch_segments(
         )
     return file_items
 
+
 def download_360(
     video_id: str,
     output_folder: str,
@@ -254,7 +255,7 @@ def download_360(
     check_size: bool = True,
     skip_exists: bool = True,
     time_out: int = 30,
-    cookie=None
+    cookie=None,
 ) -> List[str]:
     """
     :param skip_exists: whether to skip the existing files. If True, ext should be specified.
@@ -290,14 +291,16 @@ def download_360(
         "-N",
         "4",
         "--extractor-args",
-        "youtube:player_client=all",
+        "youtube:player_client=android_vr",  # "youtube:player_client=all",
+        "--cookies",
+        "/flash/project_462001132/viertoli/repos/OmniAudio/Sphere360/toolset/crawl/download/cookies.txt",
         "--merge-output-format",
         ext,
     ]
 
     if proxy is not None:
         cmd += ["--proxy", proxy]
-    
+
     if cookie is not None:
         cmd += ["--cookies", cookie]
 
@@ -358,9 +361,7 @@ def download_360_segments(
     format_code = "bv[height<=1440]+ba[audio_channels=4]"
     ext = "webm"
 
-    origin_file_items = [
-        video_id + "_" + str(start_time) for start_time in start_times
-    ]
+    origin_file_items = [video_id + "_" + str(start_time) for start_time in start_times]
     file_path_base = os.path.join(output_folder, video_id)
     if skip_exists:
         original_start_times = start_times
@@ -376,9 +377,7 @@ def download_360_segments(
 
     end_times = [t + time_interval for t in start_times]
 
-    file_items = [
-        video_id + "_" + str(start_time) for start_time in start_times
-    ]
+    file_items = [video_id + "_" + str(start_time) for start_time in start_times]
 
     # specify command
     cmd = [
@@ -396,14 +395,14 @@ def download_360_segments(
         "4",
         "--force-keyframes-at-cuts",
         "--extractor-args",
-        "youtube:player_client=all",
+        "youtube:player_client=android_vr",  # "youtube:player_client=all",
         "--merge-output-format",
         "webm",
     ]
 
     if proxy is not None:
         cmd += ["--proxy", proxy]
-    
+
     if cookie is not None:
         cmd += ["--cookies", cookie]
 
@@ -488,9 +487,7 @@ def download_video_segments(
         else:
             format_code += f"[ext={ext}]"
 
-    origin_file_items = [
-        video_id + "_" + str(start_time) for start_time in start_times
-    ]
+    origin_file_items = [video_id + "_" + str(start_time) for start_time in start_times]
     file_path_base = os.path.join(output_folder, video_id)
     if skip_exists:
         if ext is None:
@@ -508,9 +505,7 @@ def download_video_segments(
 
     end_times = [t + time_interval for t in start_times]
 
-    file_items = [
-        video_id + "_" + str(start_time) for start_time in start_times
-    ]
+    file_items = [video_id + "_" + str(start_time) for start_time in start_times]
 
     # Specify command
     cmd = [
@@ -670,9 +665,7 @@ def download_list_4ch(
             video_ids, start_times = get_video_ids_and_start_times(input_file)
             start_times_list = [[start_time] for start_time in start_times]
         elif specify_start == "multiple":
-            video_ids, start_times_list = get_video_ids_and_start_times_list(
-                input_file
-            )
+            video_ids, start_times_list = get_video_ids_and_start_times_list(input_file)
         else:
             raise ValueError("Invalid specify_start value.")
     else:
@@ -789,14 +782,13 @@ def download_list_4ch(
     with open(success_list_name, "w") as f:
         for item in success_list:
             f.write(f"{item}\n")
-    print(
-        f"{len(success_list)} success files written into {success_list_name}."
-    )
+    print(f"{len(success_list)} success files written into {success_list_name}.")
     fail_list.sort()
     with open(fail_list_name, "w") as f:
         for item in fail_list:
             f.write(f"{item}\n")
     print(f"{len(fail_list)} fail files written into {fail_list_name}.")
+
 
 def download_list_360(
     input_file,
@@ -840,9 +832,7 @@ def download_list_360(
             video_ids, start_times = get_video_ids_and_start_times(input_file)
             start_times_list = [[start_time] for start_time in start_times]
         elif specify_start == "multiple":
-            video_ids, start_times_list = get_video_ids_and_start_times_list(
-                input_file
-            )
+            video_ids, start_times_list = get_video_ids_and_start_times_list(input_file)
         else:
             raise ValueError("Invalid specify_start value.")
     else:
@@ -932,7 +922,7 @@ def download_list_360(
                     "output_folder": output_folder,
                     "proxy": proxy,
                     "time_interval": time_interval,
-                    "cookie": cookie
+                    "cookie": cookie,
                 }
 
         arg_iter = arg_gen(video_ids, start_times_list)
@@ -970,15 +960,13 @@ def download_list_360(
     with open(success_list_name, "w") as f:
         for item in success_list:
             f.write(f"{item}\n")
-    print(
-        f"{len(success_list)} success files written into {success_list_name}."
-    )
+    print(f"{len(success_list)} success files written into {success_list_name}.")
     fail_list.sort()
     with open(fail_list_name, "w") as f:
         for item in fail_list:
             f.write(f"{item}\n")
     print(f"{len(fail_list)} fail files written into {fail_list_name}.")
-    
+
     return success_list
 
 
