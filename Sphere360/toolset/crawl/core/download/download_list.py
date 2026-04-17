@@ -197,9 +197,11 @@ def download_4ch_segments(
         "4",
         "--force-keyframes-at-cuts",
         "--extractor-args",
-        "youtube:player_client=android_vr",  # "youtube:player_client=all",
+        "youtube:player_client=all",
         "--merge-output-format",
         "webm",
+        "-t",
+        "sleep",
     ]
 
     if proxy is not None:
@@ -291,9 +293,9 @@ def download_360(
         "-N",
         "4",
         "--extractor-args",
-        "youtube:player_client=android_vr",  # "youtube:player_client=all",
-        "--cookies",
-        "/flash/project_462001132/viertoli/repos/OmniAudio/Sphere360/toolset/crawl/download/cookies.txt",
+        "youtube:player_client=all",
+        "-t",
+        "sleep",
         "--merge-output-format",
         ext,
     ]
@@ -395,9 +397,11 @@ def download_360_segments(
         "4",
         "--force-keyframes-at-cuts",
         "--extractor-args",
-        "youtube:player_client=android_vr",  # "youtube:player_client=all",
+        "youtube:player_client=all",
         "--merge-output-format",
         "webm",
+        "-t",
+        "sleep",
     ]
 
     if proxy is not None:
